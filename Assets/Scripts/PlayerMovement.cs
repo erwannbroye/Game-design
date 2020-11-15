@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     //Wallrunning
     public LayerMask whatIsWall;
     public float wallrunForce,maxWallrunTime, maxWallSpeed;
-    bool isWallRight, isWallLeft;
+    bool isWallRight, isWallLeft, isWallFront, isWallBack;
     bool isWallRunning;
     public float maxWallRunCameraTilt, wallRunCameraTilt;
 
@@ -87,14 +87,11 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         MyInput();
-        Look();
+        WallRunCameraTilt();
         CheckForWall();
         WallRunInput();
     }
 
-    /// <summary>
-    /// Find user input. Should put this in its own class but im lazy
-    /// </summary>
     private void MyInput()
     {
         x = Input.GetAxisRaw("Horizontal");
@@ -166,9 +163,12 @@ public class PlayerMovement : MonoBehaviour
         if (grounded && !readyToSlide) multiplierV = 0f;
 
         //Apply forces to move player
-        rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
-        if (!isWallRunning)
+        if (((!isWallFront && y > 0) || (!isWallBack && y < 0)))
+            rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
+        if (!isWallRunning && ((!isWallRight && x > 0) || (!isWallLeft && x < 0))) {
+            Debug.Log("move Horizontal" + isWallRight + " " +x);
             rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+        }
     }
 
     private void Jump()
@@ -195,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
             //normal jump
             if (isWallLeft && !Input.GetKey(KeyCode.D) || isWallRight && !Input.GetKey(KeyCode.Q))
             {
-                rb.AddForce(Vector2.up * jumpForce * 1.5f);
+                rb.AddForce(Vector2.up * jumpForce * 1.4f);
                 rb.AddForce(normalVector * jumpForce * 0.5f);
             } else {
                 rb.AddForce(Vector2.up * jumpForce * 1.2f);
@@ -206,10 +206,8 @@ public class PlayerMovement : MonoBehaviour
             if (isWallRight || isWallLeft && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) rb.AddForce(-orientation.up * jumpForce * 1f);
             if (isWallRight && Input.GetKey(KeyCode.Q)) {
                 rb.AddForce(-orientation.right * jumpForce * 1.5f);
-                Debug.Log("jump left");
             }
             if (isWallLeft && Input.GetKey(KeyCode.D))  {
-                Debug.Log("jump right");
                 rb.AddForce(orientation.right * jumpForce * 1.5f);
             }
 
@@ -222,13 +220,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void WallRunInput() //make sure to call in void Update
+    private void WallRunInput()
     {
-        if ((Input.GetKey(KeyCode.D) && isWallRight) || (Input.GetKey(KeyCode.Q) && isWallLeft)) 
+        if (Input.GetKey(KeyCode.Z) && ((Input.GetKey(KeyCode.D) && isWallRight) || (Input.GetKey(KeyCode.Q) && isWallLeft))) 
             StartWallrun();
         if (y == 0 && isWallRunning)
             StopWallRun();
     }
+
     private void StartWallrun()
     {
         Vector3 v = rb.velocity;
@@ -247,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(orientation.forward * wallrunForce * Time.deltaTime);
 
             //Make sure char sticks to wall
-            if (isWallRight)
+            if (isWallRight && isWallRunning)
                 rb.AddForce(orientation.right * wallrunForce / 5 * Time.deltaTime);
             else
                 rb.AddForce(-orientation.right * wallrunForce / 5 * Time.deltaTime);
@@ -265,13 +264,16 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetWallJump), jumpCooldown);
         }
     }
-    private void CheckForWall() //make sure to call in void Update
+    private void CheckForWall()
     {
         isWallRight = Physics.Raycast(transform.position, orientation.right, 1f, whatIsWall);
         isWallLeft = Physics.Raycast(transform.position, -orientation.right, 1f, whatIsWall);
-        //leave wall run
-        if (!isWallLeft && !isWallRight) StopWallRun();
-        //reset double jump (if you have one :D)
+        isWallFront = Physics.Raycast(transform.position, orientation.forward, 1f, whatIsWall);
+        isWallBack = Physics.Raycast(transform.position, -orientation.forward, 1f, whatIsWall);
+
+
+        if (!isWallLeft && !isWallRight) 
+            StopWallRun();
     }
 
     private void ResetJump()
@@ -307,25 +309,14 @@ public class PlayerMovement : MonoBehaviour
 
    
     private float desiredX;
-    private void Look()
+    private void WallRunCameraTilt()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        
 
-        //Find current look rotation
-        Vector3 rot = playerCam.transform.localRotation.eulerAngles;
-        desiredX = rot.y + mouseX;
-
-        //Rotate, and also make sure we dont over- or under-rotate.
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //Perform the rotations
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, wallRunCameraTilt);
-        orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
 
-        //While Wallrunning
-        //Tilts camera in .5 second
         if (Math.Abs(wallRunCameraTilt) < maxWallRunCameraTilt && isWallRunning && isWallRight)
             wallRunCameraTilt += Time.deltaTime * maxWallRunCameraTilt * 2;
         if (Math.Abs(wallRunCameraTilt) < maxWallRunCameraTilt && isWallRunning && isWallLeft)
@@ -356,10 +347,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Find the velocity relative to where the player is looking
-    /// Useful for vectors calculations regarding movement and limiting movement
-    /// </summary>
     public Vector2 FindVelRelativeToLook()
     {
         float lookAngle = orientation.transform.eulerAngles.y;
@@ -383,9 +370,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool cancellingGrounded;
 
-    /// <summary>
-    /// Handle ground detection
-    /// </summary>
+
     private void OnCollisionStay(Collision other)
     {
         //Make sure we are only checking for walkable layers

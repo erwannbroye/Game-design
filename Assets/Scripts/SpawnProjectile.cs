@@ -24,7 +24,7 @@ public class SpawnProjectile : MonoBehaviour
         GameObject bullet;
         if (firepoint) {
             bullet = Instantiate(effectToSpawn, firepoint.transform.position, firepoint.transform.rotation);
-            bullet.GetComponent<Bullet>().damage = bulletDamage;
+            bullet.GetComponent<BulletPlayer>().damage = bulletDamage;
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             bullet.tag = gameObject.tag;
             rb.AddForce(firepoint.transform.forward * bulletSpeed, ForceMode.Impulse);

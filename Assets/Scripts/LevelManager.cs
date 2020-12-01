@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
 
     public void restartLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Physics.gravity = new Vector3(0, -30, 0);
     }
 
     public void SaveLevel()

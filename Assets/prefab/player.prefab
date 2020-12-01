@@ -3729,6 +3729,7 @@ MonoBehaviour:
   y: 0
   dashForce: 2500
   dashTime: 0.5
+  readyToDash: 0
 --- !u!114 &2000355816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3765,7 +3766,8 @@ MonoBehaviour:
   onHit:
     m_PersistentCalls:
       m_Calls: []
-  deathHeight: -50
+  deathHeightY: 100
+  deathHeightX: 100
 --- !u!1 &8228956039451354091
 GameObject:
   m_ObjectHideFlags: 0

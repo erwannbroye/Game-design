@@ -6,7 +6,8 @@ public class PlayerDamageable : DamageableObject
 {
     // Start is called before the first frame update
 
-    public int deathHeight;
+    public int deathHeightY;
+    public int deathHeightX;
     
     void Update() {
         nextRegen += Time.deltaTime;
@@ -14,7 +15,13 @@ public class PlayerDamageable : DamageableObject
             nextRegen = 0;
             hp = (hp + regenAmount > maxHp ? maxHp : hp + regenAmount);
         }
-        if (transform.position.y < deathHeight && onDeath != null)
+        if (transform.position.y < -deathHeightY && onDeath != null)
+            onDeath.Invoke();
+        if (transform.position.y > deathHeightY && onDeath != null)
+            onDeath.Invoke();
+        if (transform.position.x < -deathHeightX && onDeath != null)
+            onDeath.Invoke();
+        if (transform.position.x > deathHeightX && onDeath != null)
             onDeath.Invoke();
     }
 

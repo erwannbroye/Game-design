@@ -1963,7 +1963,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.37673548, g: 0.48872182, b: 0.9622642, a: 1}
+  m_Color: {r: 0.7325142, g: 0.37647057, b: 0.9607843, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -10691,6 +10691,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228956039702095586, guid: 22d59bef5372a274aa313b5268f9fc1e,
+        type: 3}
+      propertyPath: bulletSpeed
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22d59bef5372a274aa313b5268f9fc1e, type: 3}

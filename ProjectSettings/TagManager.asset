@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Player_bullet
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,6 +16,8 @@ TagManager:
   - UI
   - 
   - 
+  - WhatIsPlayer
+  - WhatIsEnemy
   - ground
   - wall
   - grappable

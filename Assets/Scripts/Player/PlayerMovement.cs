@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashForce;
     public float dashTime;
     bool allowDashForceCounter;
-    bool readyToDash;
+    public bool readyToDash;
     Vector3 dashStartVector;
 
 
@@ -291,7 +291,7 @@ public class PlayerMovement : MonoBehaviour
         isWallBack = Physics.Raycast(transform.position, -orientation.forward, 1f, whatIsWall);
 
 
-        if (!isWallLeft && !isWallRight) 
+        if (!isWallLeft && !isWallRight && isWallRunning) 
             StopWallRun();
     }
 

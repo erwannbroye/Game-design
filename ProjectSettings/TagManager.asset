@@ -4,11 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-<<<<<<< HEAD
   - Bullet
-=======
->>>>>>> 8009c49b7bea6b6b52dcf1ffa23a909e67c5e5c4
   layers:
   - Default
   - TransparentFX
@@ -18,11 +14,11 @@ TagManager:
   - UI
   - 
   - 
-  - ground
-  - wall
-  - grappable
   - WhatIsPlayer
   - WhatIsEnemy
+  - ground
+  - 
+  - 
   - 
   - 
   - 

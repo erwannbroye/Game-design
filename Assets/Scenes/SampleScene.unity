@@ -4258,7 +4258,7 @@ GameObject:
   - component: {fileID: 1421308491}
   - component: {fileID: 1421308495}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4356,6 +4356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51e5c0b9ab04f14e87c4038c8d64414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audiomixer: {fileID: 24100000, guid: 6814448c4927f2e4bad30fd6b3fd054e, type: 2}
   pauseMenu: {fileID: 245309091}
 --- !u!1001 &1467270732
 PrefabInstance:
@@ -6114,13 +6115,24 @@ MonoBehaviour:
   m_FillRect: {fileID: 2115217481}
   m_HandleRect: {fileID: 754133102}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 50
+  m_Value: -40
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1421308495}
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1906941237
 PrefabInstance:
   m_ObjectHideFlags: 0

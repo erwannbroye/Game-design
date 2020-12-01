@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/NeonSphere - Starter Pack/Scenes/NeonScene.unity
-    guid: a4c251521ce2ec2499d5db4fd55c1c9f
-  - enabled: 1
     path: Assets/Scenes/MenuScene.unity
     guid: ae6e83945bbaa2949a6d22339cbbeed4
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/showCase.unity
+    guid: fc2b266ed9ff96049bd5313863b750f1
+  - enabled: 1
+    path: Assets/Scenes/Level_1.unity
+    guid: 278d91d4ab197474791dfeb03085452b
   m_configObjects: {}

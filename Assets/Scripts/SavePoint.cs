@@ -21,6 +21,7 @@ public class SavePoint : MonoBehaviour
             levelManager.currentLevel += 1;
             SaveSystem.SaveLevel(levelManager);
             levelManager.currentLevel -= 1;
+            levelManager.LoadSceneLevel();
         }
     }
 }

@@ -592,6 +592,7 @@ MonoBehaviour:
   robotMesh: {fileID: 1075800888}
   animator: {fileID: 0}
   moveSpeed: 4500
+  mass: 10
   maxSpeed: 20
   grounded: 0
   whatIsGround:
@@ -609,6 +610,7 @@ MonoBehaviour:
   y: 0
   dashForce: 2500
   dashTime: 0.25
+  readyToDash: 0
 --- !u!54 &103425853
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2013,7 +2015,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   gunTip: {fileID: 350527174}
-  camera: {fileID: 192784808}
+  cameraTransform: {fileID: 0}
   player: {fileID: 103425851}
 --- !u!1 &355219957
 GameObject:
@@ -3427,13 +3429,24 @@ MonoBehaviour:
   m_FillRect: {fileID: 1125118134}
   m_HandleRect: {fileID: 2135022104}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 50
+  m_Value: -40
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 773570099}
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &617747080
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,6 +4076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51e5c0b9ab04f14e87c4038c8d64414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audiomixer: {fileID: 24100000, guid: 6814448c4927f2e4bad30fd6b3fd054e, type: 2}
   pauseMenu: {fileID: 1765259575}
 --- !u!114 &773570100
 MonoBehaviour:
@@ -7862,14 +7876,16 @@ MonoBehaviour:
   hp: 100
   maxHp: 100
   regenAmount: 0
+  hitableTag:
+  - Player
+  alwaysRemoveColliderOnDeath: 0
+  nextRegen: 0
   onDeath:
     m_PersistentCalls:
       m_Calls: []
   onHit:
     m_PersistentCalls:
       m_Calls: []
-  hitableTag:
-  - Player
 --- !u!136 &1514207666
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8186,6 +8202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 47326671, guid: 22d59bef5372a274aa313b5268f9fc1e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 977861030426965561, guid: 22d59bef5372a274aa313b5268f9fc1e,
         type: 3}
       propertyPath: m_Transforms.Array.data[0]

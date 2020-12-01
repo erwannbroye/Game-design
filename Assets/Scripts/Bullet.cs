@@ -1,20 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public GameObject hitEffect;
-    public int damage = 5;
+    private Transform target;
 
-    void OnCollisionEnter(Collision col) {
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        if (col.gameObject.GetComponent<DamageableObject>())
+    public float speed = 70f;
+    public GameObject impactEffect;
+
+    public void Seek(Transform _target)
+    {
+        target = _target;
+    }
+
+    void Update() {
+        if (target == null)
         {
-            Debug.Log("hit " + col.gameObject.name);
-            col.gameObject.GetComponent<DamageableObject>().takeDamage(damage, gameObject);
+            Destroy(gameObject);
+            return;
         }
-        Destroy(effect, 5f);
+
+        Vector3 dir = target.position - transform.position;
+        float distanceThisFrame = speed * Time.deltaTime;
+
+        if (dir.magnitude <= distanceThisFrame)
+        {
+            HitTarget();
+            return;
+        }
+
+        transform.Translate (dir.normalized * distanceThisFrame, Space.World);
+
+    }
+
+    void HitTarget()
+    {
+        GameObject effectIns = Instantiate(impactEffect, transform.position, transform.rotation);
+        Destroy(effectIns, 2f);
         Destroy(gameObject);
     }
 }

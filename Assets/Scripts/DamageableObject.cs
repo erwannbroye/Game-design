@@ -9,14 +9,28 @@ public class DamageableObject : MonoBehaviour
     public float hp;
     public float maxHp;
     public int regenAmount;
+    public List<string> hitableTag;
+    public bool alwaysRemoveColliderOnDeath;
+    public float nextRegen = 0;
     public UnityEvent onDeath = new UnityEvent();
     public UnityEvent onHit = new UnityEvent();
 
-    public List<string> hitableTag;
+
+
+    void Update() {
+        nextRegen += Time.deltaTime;
+        if (nextRegen >= 1) {
+            nextRegen = 0;
+            hp = (hp + regenAmount > maxHp ? maxHp : hp + regenAmount);
+        }
+    }
+
+    public void destroyOndeath() {
+        Destroy(gameObject);
+    }
 
     virtual public void takeDamage(int damage, GameObject origin)
     {
-        Debug.Log(origin.tag);
         if (!hitableTag.Contains(origin.tag))
             return;
         hp -= damage;
@@ -25,10 +39,15 @@ public class DamageableObject : MonoBehaviour
         {
             hp = 0;
             Debug.Log(name + " is dead.");
+            if (alwaysRemoveColliderOnDeath)
+                foreach(Collider c in GetComponents<Collider> ())
+                    c.enabled = false;
+        
             if (onDeath != null)
                 onDeath.Invoke();
+            else
+                destroyOndeath();
 
-            Destroy(gameObject);
         } else if (onHit != null)
             onHit.Invoke();
     }

@@ -11,7 +11,6 @@ public class Bullet : MonoBehaviour
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         if (col.gameObject.GetComponent<DamageableObject>())
         {
-            Debug.Log("hit " + col.gameObject.name);
             col.gameObject.GetComponent<DamageableObject>().takeDamage(damage, gameObject);
         }
         Destroy(effect, 5f);

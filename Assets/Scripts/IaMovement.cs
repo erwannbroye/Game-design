@@ -7,10 +7,8 @@ public class IaMovement : MonoBehaviour
     public NavMeshAgent agent;
 
     public Transform player;
-    public GameObject gun;
 
-    //Stats
-    public int health;
+    public GameObject projectile;
 
     //Check for Ground/Obstacles
     public LayerMask whatIsGround, whatIsPlayer;
@@ -25,13 +23,8 @@ public class IaMovement : MonoBehaviour
     bool alreadyAttacked;
 
     //States
-    public bool isDead;
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
-
-    //Special
-    public Material green, red, yellow;
-    public GameObject projectile;
 
     private void Awake()
     {
@@ -40,24 +33,19 @@ public class IaMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (!isDead)
-        {
-            //Check if Player in sightrange
-            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        //Check if Player in sightrange
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
 
-            //Check if Player in attackrange
-            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        //Check if Player in attackrange
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-            if (!playerInSightRange && !playerInAttackRange) Patroling();
-            if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-            if (playerInAttackRange && playerInSightRange) AttackPlayer();
-        }
+        if (!playerInSightRange && !playerInAttackRange) Patroling();
+        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        if (playerInAttackRange && playerInSightRange) AttackPlayer();
     }
 
     private void Patroling()
     {
-        if (isDead) return;
-
         if (!walkPointSet) SearchWalkPoint();
 
         //Calculate direction and walk to Point
@@ -75,8 +63,8 @@ public class IaMovement : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
 
-        GetComponent<MeshRenderer>().material = green;
     }
+
     private void SearchWalkPoint()
     {
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
@@ -87,18 +75,14 @@ public class IaMovement : MonoBehaviour
         if (Physics.Raycast(walkPoint,-transform.up, 2,whatIsGround))
         walkPointSet = true;
     }
+
     private void ChasePlayer()
     {
-        if (isDead) return;
-
         agent.SetDestination(player.position);
-
-        GetComponent<MeshRenderer>().material = yellow;
     }
+
     private void AttackPlayer()
     {
-        if (isDead) return;
-
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
@@ -116,23 +100,13 @@ public class IaMovement : MonoBehaviour
             Invoke("ResetAttack", timeBetweenAttacks);
         }
 
-        GetComponent<MeshRenderer>().material = red;
     }
     private void ResetAttack()
     {
-        if (isDead) return;
 
         alreadyAttacked = false;
     }
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
 
-        if (health < 0){
-            isDead = true;
-            Invoke("Destroyy", 2.8f);
-        }
-    }
     private void Destroyy()
     {
         Destroy(gameObject);

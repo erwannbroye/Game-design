@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Turret : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Turret : MonoBehaviour
     public float range = 15f;
     public float fireRate = 1f;
     private float fireCountdown = 0f;
+    public Transform player;
+
 
     [Header("Unity Setup Fields")]
     public string enemyTag = "Player";
@@ -18,6 +21,10 @@ public class Turret : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform firePoint;
+
+    private void Awake() {
+        player = GameObject.Find("player").transform;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -70,11 +77,20 @@ public class Turret : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bulletGo =  (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
+        /*GameObject bulletGo =  (GameObject)Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
         Bullet bullet = bulletGo.GetComponent<Bullet>();
 
         if(bullet != null)
-            bullet.Seek(target);
+            bullet.Seek(target);*/
+ 
+        transform.LookAt(player);
+
+
+        //Attack
+        Rigidbody rb = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<Rigidbody>();
+
+        rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+        rb.AddForce(transform.up * 4, ForceMode.Impulse);
 
     }
 

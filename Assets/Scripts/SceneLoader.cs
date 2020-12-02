@@ -8,6 +8,15 @@ public class SceneLoader : MonoBehaviour
 {
     public AudioMixer audiomixer;
 
+    private void Awake() {
+        HardMode.hardModeActivated = false;
+    }
+
+    public void ActiveHardMode()
+    {
+        HardMode.hardModeActivated = !HardMode.hardModeActivated;
+    }
+
     public void LoadGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);   

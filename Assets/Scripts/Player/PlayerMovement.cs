@@ -152,19 +152,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        rb.AddForce(-transform.up * Time.deltaTime * 10);
+        rb.AddForce(-transform.up * Time.deltaTime * 25);
         
         Vector2 mag = FindVelRelativeToLook();
 
         float xMag = mag.x, yMag = mag.y;
         Vector3 v = rb.velocity;
-        if (v.y > startMaxSpeed)
+        if (v.y > (Mathf.Round(transform.eulerAngles.z) == 180 ? (startMaxSpeed * 2f) : startMaxSpeed))
             v.y = startMaxSpeed;
-        if (v.y < -startMaxSpeed)
+        if (v.y < (Mathf.Round(transform.eulerAngles.z) == 0 ? -(startMaxSpeed * 2f) : -startMaxSpeed))
             v.y = -startMaxSpeed;
-        if (v.x > startMaxSpeed)
+        if (v.x > (Mathf.Round(transform.eulerAngles.z) == 90 ? (startMaxSpeed * 2f) : startMaxSpeed))
             v.x = startMaxSpeed;
-        if (v.x < -startMaxSpeed)
+        if (v.x < (Mathf.Round(transform.eulerAngles.z) == -90 ? -(startMaxSpeed * 2f) : -startMaxSpeed))
             v.x = -startMaxSpeed;
         if (v.z > startMaxSpeed)
             v.z = startMaxSpeed;

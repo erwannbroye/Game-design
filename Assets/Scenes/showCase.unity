@@ -2846,6 +2846,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897693714}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &914544430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8228956040151483298, guid: 22d59bef5372a274aa313b5268f9fc1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8228956039945176978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &914544438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914544430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301e389fa39e24749af355dd23a73dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iterations: 16
+  threshold: 1.2
+  bloomShader: {fileID: 4800000, guid: ea67525784c1e45498420b725a58f57b, type: 3}
 --- !u!1 &961620133
 GameObject:
   m_ObjectHideFlags: 0
@@ -10879,6 +10900,26 @@ PrefabInstance:
         type: 3}
       propertyPath: bulletSpeed
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228956039945176983, guid: 22d59bef5372a274aa313b5268f9fc1e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228956039945176987, guid: 22d59bef5372a274aa313b5268f9fc1e,
+        type: 3}
+      propertyPath: m_ShowCustomSorter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228956039945176987, guid: 22d59bef5372a274aa313b5268f9fc1e,
+        type: 3}
+      propertyPath: m_ShowToolkit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228956039945176987, guid: 22d59bef5372a274aa313b5268f9fc1e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22d59bef5372a274aa313b5268f9fc1e, type: 3}

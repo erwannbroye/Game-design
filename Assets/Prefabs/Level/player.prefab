@@ -3538,7 +3538,7 @@ MonoBehaviour:
   animator: {fileID: 977861030426965567}
   moveSpeed: 10000
   mass: 40
-  maxSpeed: 20
+  maxSpeed: 25
   grounded: 0
   whatIsGround:
     serializedVersion: 2
@@ -3550,7 +3550,7 @@ MonoBehaviour:
   readyToSlide: 1
   readyToJump: 1
   readyToWallJump: 1
-  jumpForce: 2500
+  jumpForce: 2000
   x: 0
   y: 0
   dashForce: 2500

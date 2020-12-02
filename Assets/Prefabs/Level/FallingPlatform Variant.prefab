@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1020309511}
   - component: {fileID: 1020309513}
   - component: {fileID: 1020309512}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4877,23 +4877,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 198222, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_Name
-      value: FallingPlatform
+      value: FallingPlatform Variant (1)
       objectReference: {fileID: 0}
     - target: {fileID: 198222, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 499442, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.9
+      value: -8.6
       objectReference: {fileID: 0}
     - target: {fileID: 499442, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.7
+      value: 26.825903
       objectReference: {fileID: 0}
     - target: {fileID: 499442, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.3
+      value: 167.4
       objectReference: {fileID: 0}
     - target: {fileID: 499442, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4929,15 +4929,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 499442, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.27502
       objectReference: {fileID: 0}
     - target: {fileID: 499442, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 2.06265
       objectReference: {fileID: 0}
     - target: {fileID: 499442, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 2.06265
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f364a339d7ab5645a9a4767e2c68c1d, type: 3}

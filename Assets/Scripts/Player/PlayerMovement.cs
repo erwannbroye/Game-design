@@ -140,8 +140,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Lerp(fromAngle, toAngle, t);
             yield return null;
         }
-        transform.eulerAngles = new Vector3(((Mathf.Round(transform.eulerAngles.z) == 180 || Mathf.Round(transform.eulerAngles.z) == 0) ? 180 : transform.eulerAngles.x), ((Mathf.Round(transform.eulerAngles.z) != 180 || Mathf.Round(transform.eulerAngles.z) != 0) ? 180 : transform.eulerAngles.y), targetAngle);
-
+        transform.rotation = Quaternion.Euler(0, 0, targetAngle);
     }
 
     public void rotatePlayer(float angle) {
@@ -227,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(normalVector * 650 * 0.5f);
             }
 
-            if (isWallRight || isWallLeft && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) rb.AddForce(-orientation.up * 650 * 1f);
+            if ((isWallRight || isWallLeft) && (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D))) rb.AddForce(-orientation.up * 650 * 1f);
             if (isWallRight && Input.GetKey(KeyCode.Q)) {
                 rb.AddForce(-orientation.right * 650 * 1.5f);
             }
@@ -243,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallRunInput()
     {
-        if (Input.GetKey(KeyCode.Z) && ((Input.GetKey(KeyCode.D) && isWallRight) || (Input.GetKey(KeyCode.Q) && isWallLeft))) 
+        if (Input.GetKey(KeyCode.Z) && ((isWallRight) || (isWallLeft))) 
             StartWallrun();
         if (isWallRunning && ((!isWallRight && !isWallLeft) || y == 0))
             StopWallRun();
@@ -254,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 v = rb.velocity;
         if ((Mathf.Round(transform.eulerAngles.z) == 180 || (Mathf.Round(transform.eulerAngles.z) == 0)) && v.y < 0)
             v.y = 0;
-        else
+        else if ((Mathf.Round(transform.eulerAngles.z) == -90 || (Mathf.Round(transform.eulerAngles.z) == 90)) && v.x < 0)
             v.x = 0;
         rb.velocity = v;
         rb.useGravity = false;
@@ -269,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (isWallRight && isWallRunning)
                 rb.AddForce(orientation.right * wallrunForce / 3 * Time.deltaTime);
-            else
+            else if (isWallLeft && isWallRunning)
                 rb.AddForce(-orientation.right * wallrunForce / 3 * Time.deltaTime);
         }
     }
@@ -378,20 +377,6 @@ public class PlayerMovement : MonoBehaviour
         return new Vector2(xMag, yMag);
     }
 
-    public Vector2 FindVelRelativeToLookY()
-    {
-        float lookAngle = transform.eulerAngles.x;
-        float moveAngle = Mathf.Atan2(rb.velocity.y, rb.velocity.z) * Mathf.Rad2Deg;
-
-        float u = Mathf.DeltaAngle(lookAngle, moveAngle);
-        float v = 90 - u;
-
-        float magnitue = rb.velocity.magnitude;
-        float yMag = magnitue * Mathf.Cos(u * Mathf.Deg2Rad);
-        float xMag = magnitue * Mathf.Cos(v * Mathf.Deg2Rad);
-
-        return new Vector2(xMag, yMag);
-    }
 
     private bool IsFloor(Vector3 v)
     {

@@ -11,6 +11,7 @@ public class DamageableObject : MonoBehaviour
     public int regenAmount;
     public List<string> hitableTag;
     public bool alwaysRemoveColliderOnDeath;
+    public bool destroyAfterdeath = false;
     public float nextRegen = 0;
     public UnityEvent onDeath = new UnityEvent();
     public UnityEvent onHit = new UnityEvent();
@@ -42,10 +43,9 @@ public class DamageableObject : MonoBehaviour
             if (alwaysRemoveColliderOnDeath)
                 foreach(Collider c in GetComponents<Collider> ())
                     c.enabled = false;
-        
             if (onDeath != null)
                 onDeath.Invoke();
-            else
+            if (destroyAfterdeath)
                 destroyOndeath();
 
         } else if (onHit != null)

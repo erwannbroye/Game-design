@@ -3570,10 +3570,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHp: 100
-  regenAmount: 5
+  regenAmount: 0
   hitableTag:
   - Enemy
   alwaysRemoveColliderOnDeath: 0
+  destroyAfterdeath: 0
   nextRegen: 0
   onDeath:
     m_PersistentCalls:
@@ -3720,7 +3721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGrappleable:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 4096
   gunTip: {fileID: 908550644}
   cameraTransform: {fileID: 8228956040151483299}
   player: {fileID: 8228956038634668227}

@@ -4020,6 +4020,7 @@ GameObject:
   - component: {fileID: 8228956039945176980}
   - component: {fileID: 8228956039945176983}
   - component: {fileID: 8228956039945176987}
+  - component: {fileID: 6362802420432105824}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4148,7 +4149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8228956040151483298}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -4165,7 +4166,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8228956040151483298}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -4218,6 +4219,21 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &6362802420432105824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228956040151483298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301e389fa39e24749af355dd23a73dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iterations: 12
+  threshold: 0.69
+  bloomShader: {fileID: 4800000, guid: ea67525784c1e45498420b725a58f57b, type: 3}
 --- !u!1 &8408990036210421982
 GameObject:
   m_ObjectHideFlags: 0

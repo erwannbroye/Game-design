@@ -10,9 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3750505183365173725}
   - component: {fileID: 3750505183365173724}
+  - component: {fileID: 734407136}
+  - component: {fileID: 2929319542899789424}
+  - component: {fileID: 1549283404}
   m_Layer: 0
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  range: 15
+  range: 50
   fireRate: 1
   player: {fileID: 0}
   enemyTag: Player
@@ -55,6 +58,82 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8347295885665159, guid: eeae9279a8af75340b8f67017e34bf7f,
     type: 3}
   firePoint: {fileID: 5777570474536496886}
+--- !u!114 &734407136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750505183365173727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc2eeec55307ae43b77727b0481f2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 60
+  maxHp: 60
+  regenAmount: 0
+  hitableTag:
+  - Player_bullet
+  alwaysRemoveColliderOnDeath: 0
+  destroyAfterdeath: 1
+  nextRegen: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHit:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &2929319542899789424
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750505183365173727}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6956673, y: 2.2086334, z: 1.5280151}
+  m_Center: {x: 0.09597397, y: 0.6043167, z: -0.0030822754}
+--- !u!114 &1549283404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750505183365173727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc2eeec55307ae43b77727b0481f2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 200
+  maxHp: 200
+  regenAmount: 0
+  hitableTag:
+  - Player
+  alwaysRemoveColliderOnDeath: 0
+  destroyAfterdeath: 0
+  nextRegen: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5777570473106511641
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +145,7 @@ GameObject:
   - component: {fileID: 5777570474536496886}
   m_Layer: 0
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +177,7 @@ GameObject:
   - component: {fileID: 5777570473333853196}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,9 +222,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 984bc749dd804c74ea74d843dca05113, type: 2}
-  - {fileID: 2100000, guid: 76c36cb48358cba4cb26fe3b5455e198, type: 2}
-  - {fileID: 2100000, guid: 6c1df86c1fed3f04ea6811e716764aec, type: 2}
+  - {fileID: 2100000, guid: 5b0efffff23bd0f43a7b3256e3d9232b, type: 2}
+  - {fileID: 2100000, guid: 5b0efffff23bd0f43a7b3256e3d9232b, type: 2}
+  - {fileID: 2100000, guid: 5b0efffff23bd0f43a7b3256e3d9232b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,7 +256,7 @@ GameObject:
   - component: {fileID: 5777570474806367460}
   m_Layer: 0
   m_Name: PartToRotate
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +290,7 @@ GameObject:
   - component: {fileID: 5777570475126170163}
   m_Layer: 0
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,8 +335,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 76c36cb48358cba4cb26fe3b5455e198, type: 2}
-  - {fileID: 2100000, guid: 6c1df86c1fed3f04ea6811e716764aec, type: 2}
+  - {fileID: 2100000, guid: 5b0efffff23bd0f43a7b3256e3d9232b, type: 2}
+  - {fileID: 2100000, guid: 5b0efffff23bd0f43a7b3256e3d9232b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

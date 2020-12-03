@@ -157,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
 
         float xMag = mag.x, yMag = mag.y;
         Vector3 v = rb.velocity;
-        if (v.y > (Mathf.Round(transform.eulerAngles.z) == 180 ? (startMaxSpeed * 2f) : startMaxSpeed))
+        if (v.y > (Mathf.Round(transform.eulerAngles.z) == 180 ? (startMaxSpeed * 1.8f) : startMaxSpeed))
             v.y = startMaxSpeed;
         if (v.y < (Mathf.Round(transform.eulerAngles.z) == 0 ? -(startMaxSpeed * 2f) : -startMaxSpeed))
             v.y = -startMaxSpeed;
@@ -222,16 +222,16 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(transform.up * 650 * 1.4f);
                 rb.AddForce(normalVector * 650 * 0.5f);
             } else {
-                rb.AddForce(transform.up * 650 * 1.2f);
+                rb.AddForce(transform.up * 650 * 1.4f);
                 rb.AddForce(normalVector * 650 * 0.5f);
             }
 
             if ((isWallRight || isWallLeft) && (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D))) rb.AddForce(-orientation.up * 650 * 1f);
             if (isWallRight && Input.GetKey(KeyCode.Q)) {
-                rb.AddForce(-orientation.right * 650 * 1.5f);
+                rb.AddForce(-orientation.right * 650 * 1.6f);
             }
             if (isWallLeft && Input.GetKey(KeyCode.D))  {
-                rb.AddForce(orientation.right * 650 * 1.5f);
+                rb.AddForce(orientation.right * 650 * 1.6f);
             }
 
             rb.AddForce(orientation.forward * 650 * 1f);

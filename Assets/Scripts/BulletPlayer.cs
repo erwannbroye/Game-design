@@ -8,6 +8,8 @@ public class BulletPlayer : MonoBehaviour
     public int damage = 5;
 
     void OnCollisionEnter(Collision col) {
+        if (col.gameObject.tag == gameObject.tag)
+            return;
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         if (col.gameObject.GetComponent<DamageableObject>())
         {

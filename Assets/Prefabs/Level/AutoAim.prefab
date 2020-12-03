@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 8347295885665155}
   - component: {fileID: 8347295885665156}
   - component: {fileID: 8347295885665158}
+  - component: {fileID: -8062977131794293888}
   m_Layer: 14
   m_Name: AutoAim
-  m_TagString: Bullet
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,3 +218,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &-8062977131794293888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8347295885665159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf617ad41a55abc488efbb0a868b2c03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 2777848852065002942, guid: 5abbfbd985a8e7147946ecc9be32db77,
+    type: 3}
+  damage: 15

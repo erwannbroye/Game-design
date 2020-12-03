@@ -19,6 +19,7 @@ public class SavePoint : MonoBehaviour
         if (other.tag == "Player"){
             Debug.Log("Level Saved");
             levelManager.currentLevel += 1;
+            PlayerPrefs.SetInt("levelAt", levelManager.currentLevel);
             SaveSystem.SaveLevel(levelManager);
             levelManager.currentLevel -= 1;
             levelManager.LoadSceneLevel();

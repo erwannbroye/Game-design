@@ -9,7 +9,12 @@ public class LevelManager : MonoBehaviour
     public int currentLevel;
     public string level_name_prefix = "level_";
 
-
+    public void NewGame()
+    {
+        PlayerPrefs.SetInt("levelAt", 1);
+        currentLevel = 1;
+        LoadSceneLevel(1);
+    }
 
     public void restartLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

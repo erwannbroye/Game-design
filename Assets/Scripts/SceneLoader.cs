@@ -9,6 +9,7 @@ public class SceneLoader : MonoBehaviour
 {
     public AudioMixer audiomixer;
     public Button[] lvlButtons;
+    private LevelManager lvlManager;
 
     void Start()
     {
@@ -31,6 +32,12 @@ public class SceneLoader : MonoBehaviour
     public void ActiveHardMode()
     {
         HardMode.hardModeActivated = !HardMode.hardModeActivated;
+    }
+
+    public void NewGame()
+    {
+        PlayerPrefs.SetInt("levelAt", 1);
+        lvlManager.LoadSceneLevel(1);
     }
 
     public void QuitGame()

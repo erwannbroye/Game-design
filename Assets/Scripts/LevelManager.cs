@@ -36,7 +36,13 @@ public class LevelManager : MonoBehaviour
     public void LoadSceneLevel()
     {
         LoadCurrentLevel();
-        SceneManager.LoadScene(level_name_prefix + currentLevel);
+        if (currentLevel == 11) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SceneManager.LoadScene("MenuScene");
+        }
+        else
+            SceneManager.LoadScene(level_name_prefix + currentLevel);
     }
 
     public void LoadSceneLevel(int level)

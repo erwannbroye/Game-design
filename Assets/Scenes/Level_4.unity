@@ -2301,7 +2301,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  timeLeft: 25
+  timeLeft: 16
 --- !u!4 &873251965
 Transform:
   m_ObjectHideFlags: 0

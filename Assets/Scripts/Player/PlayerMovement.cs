@@ -43,16 +43,18 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 550f;
 
     public float x, y;
-    bool jumping, sprinting, sliding;
+    bool jumping, sliding;
 
     public float dashForce;
     public float dashTime;
     bool allowDashForceCounter;
     public bool readyToDash;
     Vector3 dashStartVector;
+    private bool cancellingGrounded;
 
 
     private Vector3 normalVector = Vector3.up;
+    private float desiredX;
 
 
     void Awake()
@@ -94,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
         else if (rb.drag == 5) {
             rb.drag = 0;
         }
-
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && readyToSlide && (x != 0 || y != 0))
             if (!grounded && readyToDash)
@@ -326,7 +327,6 @@ public class PlayerMovement : MonoBehaviour
         rb.useGravity = true;
     }
 
-    private float desiredX;
     private void WallRunCameraTilt()
     {
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, wallRunCameraTilt);
@@ -345,16 +345,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!grounded || jumping) return;
 
-        // if (Mathf.Round(transform.eulerAngles.z) == 180) {
-        //     mag.x = -mag.x;
-        // }
-       
-        // if (Math.Abs(mag.x) > threshold && Math.Abs(x) < 0.05f || (mag.x < -threshold && x > 0) || (mag.x > threshold && x < 0)) {
-        //     rb.AddForce(moveSpeed * transform.right * Time.deltaTime * -mag.x * counterMovement);
-        // }
-        // if (Math.Abs(mag.y) > threshold && Math.Abs(y) < 0.05f || (mag.y < -threshold && y > 0) || (mag.y > threshold && y < 0)) {
-        //     rb.AddForce(moveSpeed * transform.forward * Time.deltaTime * -mag.y * counterMovement);
-        // }
         if (Mathf.Sqrt((Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2))) > maxSpeed) {
             float fallspeed = rb.velocity.y;
             Vector3 n = rb.velocity.normalized * maxSpeed;
@@ -383,9 +373,6 @@ public class PlayerMovement : MonoBehaviour
         float angle = Vector3.Angle(Vector3.up, v);
         return angle < maxSlopeAngle;
     }
-
-    private bool cancellingGrounded;
-
 
     private void OnCollisionStay(Collision other)
     {

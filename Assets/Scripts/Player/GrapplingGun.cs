@@ -8,6 +8,7 @@ public class GrapplingGun : MonoBehaviour {
     public Transform gunTip, cameraTransform, player;
     private float maxDistance = 100f;
     private SpringJoint joint;
+    private Vector3 currentGrapplePosition;
 
     void Awake() {
         lr = GetComponent<LineRenderer>();
@@ -22,14 +23,10 @@ public class GrapplingGun : MonoBehaviour {
         }
     }
 
-    //Called after Update
     void LateUpdate() {
         DrawRope();
     }
 
-    /// <summary>
-    /// Call whenever we want to start a grapple
-    /// </summary>
     void StartGrapple() {
         RaycastHit hit;
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, maxDistance, whatIsGrappleable)) {
@@ -40,11 +37,9 @@ public class GrapplingGun : MonoBehaviour {
 
             float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
 
-            //The distance grapple will try to keep from grapple point. 
             joint.maxDistance = distanceFromPoint * 0.8f;
             joint.minDistance = distanceFromPoint * 0.25f;
 
-            //Adjust these values to fit your game.
             joint.spring = 4.5f;
             joint.damper = 7f;
             joint.massScale = 4.5f;
@@ -54,23 +49,15 @@ public class GrapplingGun : MonoBehaviour {
         }
     }
 
-
-    /// <summary>
-    /// Call whenever we want to stop a grapple
-    /// </summary>
     void StopGrapple() {
         lr.positionCount = 0;
         Destroy(joint);
     }
-
-    private Vector3 currentGrapplePosition;
     
     void DrawRope() {
-        //If not grappling, don't draw rope
         if (!joint) return;
 
         currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
-        
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
     }
